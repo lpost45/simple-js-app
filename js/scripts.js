@@ -36,8 +36,7 @@ let pokemonRepository = (function () {
        // document.write("<p>" + pokemonList[i].name + pokemonList[i].height + "</p>")
     //}
 //}
-//function loopFunction(pokemon) {
-//    document.write("<p>" + pokemon.name + " " + pokemon.height + "</p>");
-//}
-//pokemonList.forEach(loopFunction);
-document.write(pokemonRepository.getAll())
+function loopFunction(pokemon) {
+    document.write("<p>" + pokemon.name + " " + pokemon.height + "</p>");
+}
+pokemonRepository.getAll().forEach(loopFunction);
