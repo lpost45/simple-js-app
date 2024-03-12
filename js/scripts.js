@@ -32,7 +32,7 @@ let pokemonRepository = (function () {
         listpokemon.appendChild(button);
         pokemonList.appendChild(listpokemon);
         button.addEventListener('click', function () {
-            showDetails(pokemon);
+            showDetails(pokemon.name);
         });
     }
     function showDetails(pokemon) {
