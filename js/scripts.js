@@ -2,6 +2,56 @@ let pokemonRepository = (function () {
     let pokemonList = [];
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/';
 
+    function showModal(pokemon) {
+        let modalContainer = document.querySelector('.modal-container');
+
+        modalContainer.innerHTML = '';
+
+        let modal = document.createElement('div');
+        modal.classList.add('modal');
+
+        let closeButtonElement = document.createElement('button');
+        closeButtonElement.classList.add('modal-close');
+        closeButtonElement.innerText = 'Close';
+        closeButtonElement.addEventListener('click', hideModal);
+
+        let titleElement = document.createElement('h1');
+        titleElement.innerText = pokemon.name;
+
+        let imageElement = document.createElement('img');
+        imageElement.src = pokemon.imageUrl;
+        
+        let contentElement = document.createElement('p');
+        contentElement.innerText = 'Height: ' + pokemon.height;
+
+        modal.appendChild(closeButtonElement);
+        modal.appendChild(titleElement);
+        modal.appendChild(contentElement);
+        modal.appendChild(imageElement);
+        modalContainer.appendChild(modal);
+
+        modalContainer.classList.add('is-visible');
+
+        modalContainer.addEventListener('click', (e) => {
+            let target = e.target;
+            if (target === modalContainer) {
+                hideModal();
+            }
+        });
+    }
+
+    function hideModal() {
+        let modalContainer = document.querySelector('.modal-container');
+        modalContainer.classList.remove('is-visible');
+        window.addEventListener('keydown', (e) => {
+            let modalContainer = document.querySelector('.modal-container');
+            if(e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+                hideModal();
+            }
+        });
+    }
+
+    
     function add(pokemon) {
         pokemonList.push(pokemon);
     }
@@ -49,7 +99,7 @@ let pokemonRepository = (function () {
     }
     function showDetails(pokemon) {
         loadDetails(pokemon).then(function () {
-            console.log(pokemon);
+            showModal(pokemon);
         });
     }
     return {
